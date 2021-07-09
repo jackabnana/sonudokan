@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center my-5">
+    <br>
+    <br>
+    <h2 class="my-2">Please wait, redirecting you to payment page.</h2>
+    <br>
+    <br>
+</div>
+<br>
+<h2>
+
+</h2>
+<form style="display:none;" action="https://esewa.com.np/epay/main" method="POST" id="payForm">
+    <input value="{{order.get_total_cost}}" name="tAmt" type="hidden">
+    <input value="{{order.get_total_cost}}" name="amt" type="hidden">
+    <input value="0" name="txAmt" type="hidden">
+    <input value="0" name="psc" type="hidden">
+    <input value="0" name="pdc" type="hidden">
+    <input value="NP-ES-TRADE" name="scd" type="hidden">
+    <input value="order{{order.id}}" name="pid" type="hidden">
+    <input value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'orders:verify_esewa' order.id %}"
+        type="hidden" name="su">
+    <input value="{{request.build_absolute_uri}}" type="hidden" name="fu">
+    <input value="Submit" type="submit">
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    window.onload = function () {
+        setTimeout(function () {
+
+            document.getElementById('payForm').submit();
+        }, 1000);
+
+    };
+</script>
+{% endblock scripts %}

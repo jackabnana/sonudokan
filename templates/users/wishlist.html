@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Wishlist Items | TradeNpl
+{% endblock title %}
+
+{% block meta %}
+<!-- Primary Meta Tags -->
+<meta name="title" content="Wishlist Items | TradeNpl">
+<meta name="description" content="View items in your wishlist">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wishlist Items | TradeNpl">
+<meta property="og:description" content="View items in your wishlist">
+<meta property="og:image" content="https://tradenpl.com/media/banners/Presentatijm____on1_1.png">
+{% endblock meta %}
+
+{% block content %}
+<div class="container my-5">
+    <br>
+    <br>
+    <h3 class="my-2">Your wishlist {% if items|length is 0 %}is empty{% endif %} </h3>
+
+    <br>
+</div>
+<br>
+
+<div class="container">
+    <div class="row">
+        {% if items|length > 0 %}
+
+        <div class="table-content table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="bct-product-remove">Remove</th>
+                        <th class="bct-product-thumbnail">Image</th>
+                        <th class="cart-product-name">Product</th>
+                        <th class="bct-product-price">Price</th>
+                        <th class="bct-product-quantity">Stock</th>
+                        <th class="bct-product-subtotal">Add to Cart</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td class="bct-product-remove"><a href="{% url 'remove_wishlist' item.id %}"><i
+                                    class="fa fa-trash" title="Remove"></i></a></td>
+                        <td class="bct-product-thumbnail"><a href="{{item.product.get_absolute_url}}"><img width="100"
+                                    alt="{{item.product.name}}" src="{{item.product.main_image.url}}" /></a>
+                        </td>
+                        <td class="bct-product-name"><a href="{{item.product.get_absolute_url}}">
+                                {{item.product.name}}
+                            </a>
+                        </td>
+                        <td class="bct-product-price"><span class="amount">Rs. {{item.product.price}} </span></td>
+                        <td class="quantity">
+                            {% if item.product.in_stock %}In stock{% else %}Out of stock{% endif %}
+                        </td>
+                        <td class="product-subtotal"><span class="amount">
+                                <form style="display: inline-block;" action="{% url 'cart:cart_add' item.product.pk %}"
+                                    method="post">
+                                    <input type="hidden" value="{{item.product.id}}" name="id">
+                                    <input type="hidden" value="1" name="quantity">
+                                    {% csrf_token %}
+                                    <button class="link-ver1 addcart-ver2 bg-primary"
+                                        style="border: none;padding:3px 6px;" type="submit">
+                                        <i class="ion-ios-cart fa-1a" aria-hidden="true"></i> &nbsp;Add to cart
+                                    </button>
+                                </form>
+                            </span></td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+{% endblock content %}

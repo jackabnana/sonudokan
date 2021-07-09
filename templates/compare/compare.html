@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Compare List Items | TradeNpl
+{% endblock title %}
+
+{% block meta %}
+<!-- Primary Meta Tags -->
+<meta name="title" content="Compare List Items | TradeNpl">
+<meta name="description" content="View items in your compare">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compare List Items | TradeNpl">
+<meta property="og:description" content="View items in your compare list">
+<meta property="og:image" content="https://tradenpl.com/media/banners/Presentatijm____on1_1.png">
+
+{% endblock meta %}
+
+{% block content %}
+<div class="container my-5">
+    <br>
+    <br>
+    <h3 class="my-2">Your Compare List {% if items|length is 0 %}is empty{% endif %} </h3>
+
+    <br>
+</div>
+<div class="container">
+    <p class="text-right">
+        {% if items|length > 0 %}<a class="link-ver1 addcart-ver2 btn btn-primary"
+            href="{% url 'compare:compare_clear' %}">
+            Clear the compare list
+        </a>{% endif %}
+    </p>
+</div>
+
+<br>
+<div class="container">
+    <div class="row">
+        {% if items|length > 0 %}
+
+        <div class="table-content table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="bct-product-remove">Remove</th>
+                        <th class="bct-product-remove">Image</th>
+                        <th class="bct-product-remove">Product</th>
+                        <th class="bct-product-thumbnail">Brand</th>
+                        <th class="cart-product-name">Category</th>
+                        <th class="cart-product-name">Price</th>
+                        <th class="bct-product-price">SKU</th>
+                        <th class="bct-product-quantity">Stock</th>
+                        <th class="bct-product-subtotal">Add to Cart</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'compare:compare_remove' item.id %}"><i class="fa fa-trash"
+                                    title="Remove"></i></a>
+                        </td>
+                        <td class="bct-product-remove">
+                            <a href="{{item.get_absolute_url}}">
+                                <img width="60" src="{{item.main_image.url}}" alt="{{item.name}}">
+                            </a>
+
+                        </td>
+                        <td class="bct-product-remove">
+                            <a href="{{item.get_absolute_url}}">
+                                {{item.name}}
+                            </a>
+
+                        </td>
+                        <td class="bct-product-thumbnail">
+                            <a href="{{item.shop.get_absolute_url}}">{{item.shop}}</a>
+                        </td>
+                        <td class="bct-product-name">
+                            {{item.category}}
+                        </td>
+                        <td class="bct-product-price"><span class="amount">Rs. {{item.price}} </span></td>
+                        <td class="bct-product-price"><span class="amount">{% if item.sku %}{{item.sku}}{% else %}-{% endif %}</span></td>
+                        <td class="quantity">
+                            {% if item.in_stock %}In stock{% else %}Out of stock{% endif %}
+                        </td>
+                        <td class="product-subtotal"><span class="amount">
+                                <form style="display: inline-block;" action="{% url 'cart:cart_add' item.pk %}"
+                                    method="post">
+                                    <input type="hidden" value="{{item.id}}" name="id">
+                                    <input type="hidden" value="1" name="quantity">
+                                    {% csrf_token %}
+                                    <button class="link-ver1 addcart-ver2 bg-primary"
+                                        style="border: none;padding:3px 6px;" type="submit">
+                                        <i class="ion-ios-cart fa-1a" aria-hidden="true"></i> &nbsp;Add to cart
+                                    </button>
+                                </form>
+                            </span></td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+{% endblock content %}

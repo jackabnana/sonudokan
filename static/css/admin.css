@@ -1,0 +1,9 @@
+footer.main-footer .float-right,
+.brand-image {
+    display: none !important;
+}
+
+.alert a {
+    font-weight: bold;
+    color: white !important;
+}

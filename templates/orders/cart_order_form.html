@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Place Order
+{% endblock title %}
+
+{% block content %}
+<div class="container text-center my-5">
+    <br>
+    <br>
+    <h1 class="my-2">Place Order for:</h1>
+    <br>
+    <h4>{{ cart|length }} items in the cart</h4>
+    <br>
+</div>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        {% if cart|length is not 0 %}
+        <div class="col-md-4">
+            <div class="card">
+                <form enctype="multipart/form-data" method="POST">
+                    {{ form | crispy }}
+                    {% csrf_token %}
+                    <input type="submit" value="Place Order" class="btn-order py-0">
+                </form>
+                <br>
+
+            </div>
+            <hr>
+            <div class="text-center">
+                <h3 class="mb-2">Payment Partner</h3>
+                <div id="eSewaLogoSection"></div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock content %}
+
+
+{% block scripts %}
+<script id="1" language="JavaScript" type="text/javascript" src="https://cdn.esewa.com.np/ui/js/eSewa_logo/script.js"
+    data-width="180px" data-elementId="eSewaLogoSection" data-type="DARK"></script>
+{% endblock scripts %}
