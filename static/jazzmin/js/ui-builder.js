@@ -102,7 +102,7 @@
             }
 
             const currentSrc = $themeCSS.attr('href');
-            const currentTheme = currentSrc.split('/')[4];
+            const currentTheme = currentSrc.split('/')[6];
             const newTheme = $(this).val();
 
             $themeCSS.attr('href', currentSrc.replace(currentTheme, newTheme));
@@ -141,7 +141,7 @@
             }
 
             const currentSrc = $themeCSS.attr('href');
-            const currentTheme = currentSrc.split('/')[4];
+            const currentTheme = currentSrc.split('/')[6];
             const newTheme = $(this).val();
 
             $themeCSS.attr('href', currentSrc.replace(currentTheme, newTheme));

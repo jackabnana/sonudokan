@@ -14,7 +14,7 @@ def hide_shop(request, pk):
         shop.hide = True
         shop.save()
         messages.success(
-            request, f'Your brand was successfully hid. You can activate it later!')
+            request, f'Your Dokan was successfully hid. You can activate it later!')
     return redirect(reverse('core:dashboard'))
 
 
@@ -68,7 +68,7 @@ class HomePageView(View):
             featured=True).filter(block=False)
         featured_shops = Shop.objects.filter(
             featured=True).filter(block=False)
-        newest_products = Product.objects.filter(block=False)[:8]
+        newest_products = Product.objects.filter(block=False)[:4]
         banners = Banner.objects.all().filter(block=False)
         if AdPlacement.objects.exists():
             ad = AdPlacement.objects.get()

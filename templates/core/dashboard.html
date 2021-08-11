@@ -17,8 +17,8 @@ Dashboard
             </div>
             <div class="modal-body">
                 <p>
-                    This will make your Brand inactive in tradenpl.com and your brand plus your products wont be visible
-                    in the site. You can always comeback and make your brand active again.
+                    This will make your Dokan inactive in dokanharu.com and your dokan plus your products wont be visible
+                    in the site. You can always comeback and make your dokan active again.
                 </p>
                 <br>
                 <br>
@@ -43,13 +43,13 @@ Dashboard
         <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked">
                 {% if request.user.is_seller %}
-                <li class="active"><a data-toggle="tab" href="#menu3">My Brand</a></li>
+                <li class="active"><a data-toggle="tab" href="#menu3">My Dokan</a></li>
                 <li><a data-toggle="tab" href="#menu2">All Orders</a></li>
                 <li><a data-toggle="tab" href="#menu1">Account</a></li>
                 {% else %}
                 <li class="active"><a data-toggle="tab" href="#menu2">My Placed Orders</a></li>
                 <li><a data-toggle="tab" href="#menu1">My Account</a></li>
-                <li><a data-toggle="tab" href="#menu3">My Brand</a></li>
+                <li><a data-toggle="tab" href="#menu3">My Dokan</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -212,7 +212,7 @@ Dashboard
                         {% endfor %}
                     </div>
                     {% else %}
-                    You haven't placed any order to other products on Trade Nepal yet!
+                    You haven't placed any order to other products on Dokanharu yet!
                     {% endif %}
                 </div>
                 <div id="menu3" class="tab-pane fade {% if request.user.is_seller %}in active{% endif %}">
@@ -229,12 +229,12 @@ Dashboard
                         {% endif %}
                         {% endif %}
                         &nbsp;&nbsp;&nbsp; <a href="{% url 'shops:edit-shop' shop.pk %}" class="btn btn-success">Edit
-                            Brand</a> &nbsp;&nbsp;
+                            Dokan</a> &nbsp;&nbsp;
 
                         {% if shop.hide %}
-                        <a href="{% url 'shops:activate-shop' shop.pk %}" class="btn btn-primary">Activate Brand</a>
+                        <a href="{% url 'shops:activate-shop' shop.pk %}" class="btn btn-primary">Activate Dokan</a>
                         {% else %}
-                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#hideDokan">Hide Brand</a>
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#hideDokan">Hide Dokan</a>
                         {% endif %}
 
 
@@ -246,7 +246,7 @@ Dashboard
                         <div class="col-md-8">
                             <p>
                                 {% if shop.limited %}
-                                As a new free Brand owner, you can only add 20 products for now. If you want to remove
+                                As a new free Dokan owner, you can only add 20 products for now. If you want to remove
                                 this limit and add more products then please contact with the website adminitrator.
                                 {% else %}
                                 Limitation to add only 20 products has been removed. Now you can add as many products
@@ -295,12 +295,12 @@ Dashboard
                     </ul>
                     {% else %}
                     <div class="text-center">
-                        <h4>To create your own Brand on please click link below and fill up the form first.</h4>
+                        <h4>To create your own Dokan on please click link below and fill up the form first.</h4>
                         <br>
                         <p>
                             <b>
                                 <a href="{% url 'shops:create-shop' %}" class="btn-main-bg"
-                                    style="padding:6px 12px;">Create Brand</a>
+                                    style="padding:6px 12px;">Create Dokan</a>
                             </b>
                         </p>
                     </div>
